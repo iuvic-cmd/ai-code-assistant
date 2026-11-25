@@ -13,7 +13,7 @@ PROMPTS = {
 # --- Интерфейс ---
 st.set_page_config(page_title="AI Code Assistant", page_icon="🧑‍💻", layout="wide")
 st.title("🧑‍💻 AI Code Assistant")
-st.caption("Модель: **Gemini 1.5 Flash**")
+st.caption("Модель: **Gemini 2.5 Flash**")
 
 if "history" not in st.session_state:
     st.session_state.history = []
