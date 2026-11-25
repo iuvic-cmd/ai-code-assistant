@@ -43,32 +43,25 @@ if st.button("🚀 Отправить", type="primary"):
 
         st.markdown("### Ответ")
         placeholder = st.empty()
-        full = ""
         
         try:
-            # Берем ключ из настроек Streamlit
             api_key = st.secrets["GEMINI_API_KEY"]
             genai.configure(api_key=api_key)
             
-            # Используем актуальную модель 3.8
+            # Используем модель 3.8
             model = genai.GenerativeModel('gemini-3.8-flash')
             
-            # Собираем историю диалога в один текст
             full_prompt = SYSTEM + "\n\n" + "\n".join([m["content"] for m in st.session_state.history])
             
-            # Запрос к модели
-            response = model.generate_content(full_prompt, stream=True)
-            for chunk in response:
-                if chunk.text:
-                    full += chunk.text
-                    placeholder.markdown(full + "▌")
-            placeholder.markdown(full)
-            
-            # Сохраняем ответ в историю
-            st.session_state.history.append({"role": "assistant", "content": full})
+            # Выводим индикатор загрузки
+            with st.spinner("Думаю..."):
+                response = model.generate_content(full_prompt)
+                placeholder.markdown(response.text)
+                st.session_state.history.append({"role": "assistant", "content": response.text})
             
         except Exception as e:
-            st.error(f"Ошибка запроса: {e}")
+            # Если ошибка - выводим её красным
+            st.error(f"Ошибка: {e}")
 
 # --- История ---
 if st.session_state.history:
