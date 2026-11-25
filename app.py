@@ -6,13 +6,11 @@ st.set_page_config(page_title="AI Code Assistant", page_icon="🧑‍💻", layo
 st.title("🧑‍💻 AI Code Assistant")
 st.caption(f"Модель: **{MODEL}**")
 
-# --- память диалога в рамках сессии ---
 if "history" not in st.session_state:
     st.session_state.history = []
 if "feedback" not in st.session_state:
     st.session_state.feedback = []
 
-# --- боковая панель ---
 with st.sidebar:
     mode = st.selectbox("Режим", list(PROMPTS.keys()))
     lang = st.text_input("Язык кода", value="python")
@@ -22,13 +20,11 @@ with st.sidebar:
         st.session_state.feedback = []
         st.rerun()
 
-# --- поля ввода ---
 code = st.text_area("Код", height=220, placeholder="Вставь код сюда...")
 error = ""
 if mode == "Исправить ошибку":
     error = st.text_area("Текст ошибки", height=120, placeholder="Вставь traceback...")
 
-# --- отправка ---
 if st.button("🚀 Отправить", type="primary"):
     if not code.strip():
         st.warning("Вставь код.")
@@ -50,7 +46,6 @@ if st.button("🚀 Отправить", type="primary"):
         except Exception as e:
             st.error(f"Ошибка запроса к модели: {e}")
 
-# --- история + фидбэк ---
 if st.session_state.history:
     st.divider()
     st.markdown("### История")
