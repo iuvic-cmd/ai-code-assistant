@@ -4,7 +4,7 @@ import google.generativeai as genai
 # --- Настройки ---
 st.set_page_config(page_title="AI Code Assistant", page_icon="🧑‍💻", layout="wide")
 st.title("🧑‍💻 AI Code Assistant")
-st.caption("Модель: **Gemini 2.5 Flash**")
+st.caption("Модель: **Gemini 3.8 Flash**")
 
 SYSTEM = "Ты опытный senior разработчик. Отвечай кратко, с примерами кода в markdown."
 
