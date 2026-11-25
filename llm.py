@@ -3,12 +3,10 @@ from openai import OpenAI
 
 MODEL = "gpt-4o-mini"
 
-
 def _client():
-    # ключ берём из Secrets (Streamlit Cloud) или переменной окружения
+    # ключ берём из Secrets (Streamlit Cloud)
     api_key = st.secrets.get("OPENAI_API_KEY") if hasattr(st, "secrets") else None
     return OpenAI(api_key=api_key)
-
 
 def stream_chat(system: str, messages: list):
     """messages: список {"role": "user"/"assistant", "content": str}"""
