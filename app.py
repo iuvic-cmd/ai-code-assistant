@@ -50,8 +50,8 @@ if st.button("🚀 Отправить", type="primary"):
             api_key = st.secrets["GEMINI_API_KEY"]
             genai.configure(api_key=api_key)
             
-            # Используем актуальную модель
-            model = genai.GenerativeModel('gemini-2.5-flash')
+            # Используем актуальную модель 3.8
+            model = genai.GenerativeModel('gemini-3.8-flash')
             
             # Собираем историю диалога в один текст
             full_prompt = SYSTEM + "\n\n" + "\n".join([m["content"] for m in st.session_state.history])
